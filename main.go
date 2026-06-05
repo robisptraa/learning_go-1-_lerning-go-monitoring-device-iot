@@ -3,24 +3,41 @@ package main
 import (
 	"fmt"
 	"learning/database"
-	"learning/repository"
-	"learning/models"
+	// "learning/repository"
+	// "learning/models"
+	"learning/usecase"
+	"learning/utils"
+	
 )
-
-
 
 func main() {
 	database.Connect()
+	lang := usecase.SelectLanguage()
+	_ = utils.GetMessages(lang)
+
+	 fmt.Println(utils.GetMessages(lang).MenuTitle)
 
 	for {
-		fmt.Println("1. Create Device")
-		fmt.Println("2. List Devices")
-		fmt.Println("3. Update Device")
-		fmt.Println("4. Delete Device")
-		fmt.Println("5. Exit")
-		fmt.Print("Select an option: ")
-	}
-	fmt.Println("IOT MONITORING DEVICE CLI Mas OBets learning Go")
+		usecase.ShowMenu(utils.GetMessages(lang).MenuTitle)
+		var choice int
+		fmt.Scan(&choice)
 
+		switch choice {
+		case 1:
+			usecase.CreateDevice(utils.GetMessages(lang).MenuTitle)
+		case 2:
+			usecase.ListDevices(utils.GetMessages(lang).MenuTitle)
+		case 3:
+			usecase.UpdateDevice(utils.GetMessages(lang).MenuTitle)
+		case 4:
+			usecase.DeleteDevice(utils.GetMessages(lang).MenuTitle)
+		case 5:
+			fmt.Println("Exiting...")
+			return
+		default:
+			fmt.Println(utils.GetMessages(lang).InvalidSelect)
+		}
+	   
+	}
 }
 

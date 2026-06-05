@@ -1,7 +1,5 @@
 package utils
 
-import "learning/models"
-
 type LangData struct{
 	MenuTitle string
 	OptionAdd string
@@ -23,7 +21,7 @@ var messages = map[string]LangData{
 		OptionExit:   "5. Keluar",
 		PromptSelect: "Pilih opsi: ",
 		InvalidSelect: "Opsi tidak valid. Silakan coba lagi.",
-	}
+	},
 	"en": {
 		MenuTitle:    "IOT MONITORING DEVICE CLI",
 		OptionAdd:    "1. Create Device",
@@ -34,4 +32,15 @@ var messages = map[string]LangData{
 		PromptSelect: "Select an option: ",
 		InvalidSelect: "Invalid option. Please try again.",
 	},
+}
+
+func GetMessages(lang string) LangData {
+    if msg, ok := messages[lang]; ok {
+        return msg
+    }
+    return messages["en"]
+}
+
+func GetAllLanguages() []string {
+    return []string{"id", "en"}
 }
