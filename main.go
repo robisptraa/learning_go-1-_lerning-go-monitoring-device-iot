@@ -20,7 +20,7 @@ func main() {
 	for {
 		usecase.ShowMenu(lang)
 		var choice int
-		fmt.Scan(&choice)
+		fmt.Scanln(&choice)
 
 		switch choice {
 		case 1:
