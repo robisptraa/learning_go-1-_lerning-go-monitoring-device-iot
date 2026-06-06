@@ -2,6 +2,8 @@ package usecase
 
 import (
 	"fmt"
+	"learning/utils"
+	
 )
 
 func SelectLanguage() string {
@@ -14,7 +16,7 @@ func SelectLanguage() string {
     fmt.Scanln(&langChoice)
 
     if langChoice == 2 {
-        return "id"
+        return utils.GetMessages("id").MenuTitle
     }
-    return "en"
+    return utils.GetMessages("en").MenuTitle
 }

@@ -43,6 +43,21 @@ func GetAllDevices() ([]models.Device, error) {
 	return devices, nil
 }
 
+func GetDeviceByID(id int) (models.Device, error) {
+    var device models.Device
+    err := database.DB.QueryRow(
+        `SELECT id, device_code, device_name, location, status FROM devices WHERE id = ?`,
+        id,
+    ).Scan(
+        &device.ID,
+        &device.DeviceCode,
+        &device.DeviceName,
+        &device.Location,
+        &device.Status,
+    )
+    return device, err
+}
+
 func UpdateDevice(device *models.Device) error {
 	query := `UPDATE devices SET device_code = ?, device_name = ?, location = ?, status = ? WHERE id = ?`
 

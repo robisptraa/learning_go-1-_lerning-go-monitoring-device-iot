@@ -18,19 +18,19 @@ func main() {
 	 fmt.Println(utils.GetMessages(lang).MenuTitle)
 
 	for {
-		usecase.ShowMenu(utils.GetMessages(lang).MenuTitle)
+		usecase.ShowMenu(lang)
 		var choice int
 		fmt.Scan(&choice)
 
 		switch choice {
 		case 1:
-			usecase.CreateDevice(utils.GetMessages(lang).MenuTitle)
+			usecase.CreateDevice(lang)
 		case 2:
-			usecase.ListDevices(utils.GetMessages(lang).MenuTitle)
+			usecase.ListDevices(lang)
 		case 3:
-			usecase.UpdateDevice(utils.GetMessages(lang).MenuTitle)
+			usecase.UpdateDevice(lang)
 		case 4:
-			usecase.DeleteDevice(utils.GetMessages(lang).MenuTitle)
+			usecase.DeleteDevice(lang)
 		case 5:
 			fmt.Println("Exiting...")
 			return

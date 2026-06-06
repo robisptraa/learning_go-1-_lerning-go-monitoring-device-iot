@@ -1,27 +1,138 @@
 package usecase
 
 import (
-	"fmt"
-	"learning/utils"
+    "bufio"
+    "fmt"
+    "os"
+    "strconv"
+    "strings"
+
+    "learning/models"
+    "learning/repository"
+    "learning/utils"
 )
 
+var reader = bufio.NewReader(os.Stdin)
 
 func CreateDevice(lang string) {
     msg := utils.GetMessages(lang)
-    fmt.Println(msg.OptionAdd)
+
+    fmt.Print(msg.PromptDeviceCode)
+    code := readLine()
+
+    fmt.Print(msg.PromptDeviceName)
+    name := readLine()
+
+    fmt.Print(msg.PromptLocation)
+    location := readLine()
+
+    fmt.Print(msg.PromptStatus)
+    status := readLine()
+
+    device := models.Device{
+        DeviceCode: code,
+        DeviceName: name,
+        Location:   location,
+        Status:     status,
+    }
+
+    err := repository.CreateDevice(&device)
+    if err != nil {
+        fmt.Println(msg.ErrorOperation, err)
+        return
+    }
+
+    fmt.Println(msg.CreateSuccess)
 }
 
 func ListDevices(lang string) {
     msg := utils.GetMessages(lang)
-    fmt.Println(msg.OptionList)
+
+    devices, err := repository.GetAllDevices()
+    if err != nil {
+        fmt.Println(msg.ErrorOperation, err)
+        return
+    }
+    if len(devices) == 0 {
+        fmt.Println(msg.NoDevicesFound)
+        return
+    }
+
+    fmt.Printf("%-4s %-15s %-20s %-15s %-10s\n", "ID", "Code", "Name", "Location", "Status")
+    for _, d := range devices {
+        fmt.Printf("%-4d %-15s %-20s %-15s %-10s\n",
+            d.ID, d.DeviceCode, d.DeviceName, d.Location, d.Status)
+    }
 }
 
 func UpdateDevice(lang string) {
     msg := utils.GetMessages(lang)
-    fmt.Println(msg.OptionUpdate)
+
+    fmt.Print(msg.PromptDeviceID)
+    id := readInt()
+
+    device, err := repository.GetDeviceByID(id)
+    if err != nil {
+        fmt.Println(msg.ErrorOperation, err)
+        return
+    }
+
+    fmt.Printf("%s (%s): ", msg.PromptDeviceCode, device.DeviceCode)
+    device.DeviceCode = readDefault(device.DeviceCode)
+
+    fmt.Printf("%s (%s): ", msg.PromptDeviceName, device.DeviceName)
+    device.DeviceName = readDefault(device.DeviceName)
+
+    fmt.Printf("%s (%s): ", msg.PromptLocation, device.Location)
+    device.Location = readDefault(device.Location)
+
+    fmt.Printf("%s (%s): ", msg.PromptStatus, device.Status)
+    device.Status = readDefault(device.Status)
+
+    err = repository.UpdateDevice(&device)
+    if err != nil {
+        fmt.Println(msg.ErrorOperation, err)
+        return
+    }
+
+    fmt.Println(msg.UpdateSuccess)
 }
 
 func DeleteDevice(lang string) {
     msg := utils.GetMessages(lang)
-    fmt.Println(msg.OptionDelete)
+
+    fmt.Print(msg.PromptDeviceID)
+    id := readInt()
+
+    err := repository.DeleteDevice(id)
+    if err != nil {
+        fmt.Println(msg.ErrorOperation, err)
+        return
+    }
+
+    fmt.Println(msg.DeleteSuccess)
+}
+
+func readLine() string {
+    text, _ := reader.ReadString('\n')
+    return strings.TrimSpace(text)
+}
+
+func readDefault(defaultValue string) string {
+    line := strings.TrimSpace(readLine())
+    if line == "" {
+        return defaultValue
+    }
+    return line
+}
+
+func readInt() int {
+    for {
+        text := readLine()
+        n, err := strconv.Atoi(text)
+        if err == nil {
+            return n
+        }
+        fmt.Println("Input harus berupa angka.")
+    }
 }
