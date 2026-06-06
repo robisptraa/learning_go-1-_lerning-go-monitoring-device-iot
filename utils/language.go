@@ -19,6 +19,12 @@ type LangData struct{
 	NoDevicesFound  string
 	UpdateSuccess   string
 	DeleteSuccess   string
+	HeaderID string
+	HeaderCode string
+	HeaderName string
+	HeaderLocation string
+	HeaderStatus string
+	ExitMessage string
 }
 
 var messages = map[string]LangData{
@@ -41,6 +47,12 @@ var messages = map[string]LangData{
 		NoDevicesFound:  "Perangkat tidak ditemukan.",
 		UpdateSuccess:   "Perangkat berhasil diperbarui.",
 		DeleteSuccess:   "Perangkat berhasil dihapus.",
+		HeaderID: "ID",
+		HeaderCode: "Kode",
+		HeaderName: "Nama",
+		HeaderLocation: "Lokasi",
+		HeaderStatus: "Status",
+		ExitMessage: "Terima kasih telah menggunakan aplikasi!",
 	},
 	"en": {
 		MenuTitle:    "OBETS MONITORING DEVICE IOT BASE CLI",
@@ -61,6 +73,12 @@ var messages = map[string]LangData{
 		NoDevicesFound:  "No devices found.",
 		UpdateSuccess:   "Device updated successfully.",
 		DeleteSuccess:   "Device deleted successfully.",
+		HeaderID: "ID",
+		HeaderCode: "Code",
+		HeaderName: "Name",
+		HeaderLocation: "Location",
+		HeaderStatus: "Status",
+		ExitMessage: "Thanks for using the app!",
 	},
 }
 

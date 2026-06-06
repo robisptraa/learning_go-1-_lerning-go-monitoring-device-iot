@@ -58,7 +58,9 @@ func ListDevices(lang string) {
         return
     }
 
-    fmt.Printf("%-4s %-15s %-20s %-15s %-10s\n", "ID", "Code", "Name", "Location", "Status")
+
+	fmt.Printf("%-4s %-15s %-20s %-15s %-10s\n",
+    msg.HeaderID, msg.HeaderCode, msg.HeaderName, msg.HeaderLocation, msg.HeaderStatus)
     for _, d := range devices {
         fmt.Printf("%-4d %-15s %-20s %-15s %-10s\n",
             d.ID, d.DeviceCode, d.DeviceName, d.Location, d.Status)

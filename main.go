@@ -32,7 +32,7 @@ func main() {
 		case 4:
 			usecase.DeleteDevice(lang)
 		case 5:
-			fmt.Println("Exiting...")
+			fmt.Println(utils.GetMessages(lang).ExitMessage)
 			return
 		default:
 			fmt.Println(utils.GetMessages(lang).InvalidSelect)
