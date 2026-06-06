@@ -25,10 +25,20 @@ type LangData struct{
 	HeaderLocation string
 	HeaderStatus string
 	ExitMessage string
+	BannerAscii string
 }
 
 var messages = map[string]LangData{
 	"id": {
+		 BannerAscii: `____  ____  ______ _____
+ ____   ____   ______ ______ _____
+  / __ \ / __ ) / ____//_  __// ___/
+ / / / // __  |/ __/    / /   \__ \ 
+/ /_/ // /_/ // /___   / /   ___/ / 
+\____//_____//_____/  /_/   /____/  
+       I O T   M O N I T O R I N G   D E V I C E
+
+`,
 		MenuTitle:    "OBETS MONITORING DEVICE IOT BASE CLI",
 		OptionAdd:    "1. Buat Perangkat",
 		OptionList:   "2. Daftar Perangkat",
@@ -55,6 +65,15 @@ var messages = map[string]LangData{
 		ExitMessage: "Terima kasih telah menggunakan aplikasi!",
 	},
 	"en": {
+		  BannerAscii: `____  ____  ______ _____
+  ____   ____   ______ ______ _____
+  / __ \ / __ ) / ____//_  __// ___/
+ / / / // __  |/ __/    / /   \__ \ 
+/ /_/ // /_/ // /___   / /   ___/ / 
+\____//_____//_____/  /_/   /____/  
+       I O T   M O N I T O R I N G   D E V I C E
+
+`,
 		MenuTitle:    "OBETS MONITORING DEVICE IOT BASE CLI",
 		OptionAdd:    "1. Create Device",
 		OptionList:   "2. List Devices",

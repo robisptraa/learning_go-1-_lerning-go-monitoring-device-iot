@@ -11,9 +11,11 @@ import (
 )
 
 func main() {
+	utils.PrintBannerWelcome()
 	database.Connect()
 	lang := usecase.SelectLanguage()
 	_ = utils.GetMessages(lang)
+	utils.PrintBannerMenu(lang)
 
 	 fmt.Println(utils.GetMessages(lang).MenuTitle)
 
