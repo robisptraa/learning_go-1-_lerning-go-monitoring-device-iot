@@ -14,6 +14,7 @@ type LangData struct{
     PromptLocation   string
     PromptStatus     string 
     PromptDeviceID   string
+	PromptDeviceType string
 	ErrorOperation  string
     CreateSuccess   string
 	NoDevicesFound  string
@@ -23,6 +24,7 @@ type LangData struct{
 	HeaderCode string
 	HeaderName string
 	HeaderLocation string
+	HeaderDeviceType string
 	HeaderStatus string
 	ExitMessage string
 	BannerAscii string
@@ -52,6 +54,7 @@ var messages = map[string]LangData{
     	PromptLocation:   "Masukkan lokasi: ",
     	PromptStatus:     "Masukkan status perangkat: ", 
     	PromptDeviceID:   "Masukkan ID perangkat: ",
+    	PromptDeviceType: "Masukkan tipe perangkat: ",
 		ErrorOperation:  "Terjadi kesalahan: ",
 		CreateSuccess:   "Perangkat berhasil dibuat.",
 		NoDevicesFound:  "Perangkat tidak ditemukan.",
@@ -61,6 +64,7 @@ var messages = map[string]LangData{
 		HeaderCode: "Kode",
 		HeaderName: "Nama",
 		HeaderLocation: "Lokasi",
+		HeaderDeviceType: "Tipe Perangkat",
 		HeaderStatus: "Status",
 		ExitMessage: "Terima kasih telah menggunakan aplikasi!",
 	},
@@ -87,6 +91,7 @@ var messages = map[string]LangData{
 		PromptLocation:   "Enter location: ",
 		PromptStatus:     "Enter device status: ",
 		PromptDeviceID:   "Enter device ID: ",
+		PromptDeviceType: "Enter device type: ",
 		ErrorOperation:  "An error occurred: ",
 		CreateSuccess:   "Device created successfully.",
 		NoDevicesFound:  "No devices found.",
@@ -96,6 +101,7 @@ var messages = map[string]LangData{
 		HeaderCode: "Code",
 		HeaderName: "Name",
 		HeaderLocation: "Location",
+		HeaderDeviceType: "Device Type",
 		HeaderStatus: "Status",
 		ExitMessage: "Thanks for using the app!",
 	},

@@ -6,4 +6,5 @@ type Device struct {
 	DeviceName string
 	Location string
 	Status string
+	DeviceType string
 }

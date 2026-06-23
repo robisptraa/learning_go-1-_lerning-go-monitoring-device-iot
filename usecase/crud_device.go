@@ -29,11 +29,15 @@ func CreateDevice(lang string) {
     fmt.Print(msg.PromptStatus)
     status := readLine()
 
+    fmt.Print(msg.PromptDeviceType)
+    deviceType := readLine()
+
     device := models.Device{
         DeviceCode: code,
         DeviceName: name,
         Location:   location,
         Status:     status,
+        DeviceType: deviceType,
     }
 
     err := repository.CreateDevice(&device)
@@ -59,11 +63,11 @@ func ListDevices(lang string) {
     }
 
 
-	fmt.Printf("%-4s %-15s %-20s %-15s %-10s\n",
-    msg.HeaderID, msg.HeaderCode, msg.HeaderName, msg.HeaderLocation, msg.HeaderStatus)
+	fmt.Printf("%-4s %-15s %-20s %-15s %-10s %-15s\n",
+    msg.HeaderID, msg.HeaderCode, msg.HeaderName, msg.HeaderLocation, msg.HeaderStatus, msg.HeaderDeviceType)
     for _, d := range devices {
-        fmt.Printf("%-4d %-15s %-20s %-15s %-10s\n",
-            d.ID, d.DeviceCode, d.DeviceName, d.Location, d.Status)
+        fmt.Printf("%-4d %-15s %-20s %-15s %-10s %-15s\n",
+            d.ID, d.DeviceCode, d.DeviceName, d.Location, d.Status, d.DeviceType)
     }
 }
 
@@ -90,6 +94,9 @@ func UpdateDevice(lang string) {
 
     fmt.Printf("%s (%s): ", msg.PromptStatus, device.Status)
     device.Status = readDefault(device.Status)
+
+    fmt.Printf("%s (%s): ", msg.PromptDeviceType, device.DeviceType)
+    device.DeviceType = readDefault(device.DeviceType)
 
     err = repository.UpdateDevice(&device)
     if err != nil {

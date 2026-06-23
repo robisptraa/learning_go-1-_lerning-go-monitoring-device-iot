@@ -3,7 +3,7 @@ package database
 import (
 	"database/sql"
 	"log"
-	_ "modernc.org/sqlite"
+	_"modernc.org/sqlite"
 	"io/ioutil"
 )
 
@@ -23,13 +23,12 @@ func Connect() {
 	log.Println("Connected to database successfully")
 
 	schema, err := ioutil.ReadFile("database/iot.sql")
-    if err != nil {
-        log.Fatal("Failed to read iot.sql:", err)
+	if err != nil {
+		log.Fatal("Failed to read iot.sql:", err)
+	}
 
-	 _, err = DB.Exec(string(schema))
-    if err != nil {
-        log.Fatal("Failed to initialize tables:", err)
-    }
-    }
-    
+	_, err = DB.Exec(string(schema))
+	if err != nil {
+		log.Fatal("Failed to initialize tables:", err)
+	}
 }

@@ -10,8 +10,10 @@ func CreateDevice(device *models.Device) error {
 		device_code,
 		device_name,
 		location,
-		status
-	) VALUES (?, ?, ?, ?)`
+		status,
+		device_type
+
+	) VALUES (?, ?, ?, ?, ?)`
 
 	_, err := database.DB.Exec(
 		query,
@@ -19,13 +21,14 @@ func CreateDevice(device *models.Device) error {
 		device.DeviceName,
 		device.Location,
 		device.Status,
+		device.DeviceType,
 	)
 
 	return err
 }
 
 func GetAllDevices() ([]models.Device, error) {
-	rows, err := database.DB.Query(`SELECT id, device_code, device_name, location, status FROM devices`)
+	rows, err := database.DB.Query(`SELECT id, device_code, device_name, location, status, device_type FROM devices`)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +37,7 @@ func GetAllDevices() ([]models.Device, error) {
 	var devices []models.Device
 	for rows.Next() {
 		var device models.Device
-		if err := rows.Scan(&device.ID, &device.DeviceCode, &device.DeviceName, &device.Location, &device.Status); err != nil {
+		if err := rows.Scan(&device.ID, &device.DeviceCode, &device.DeviceName, &device.Location, &device.Status, &device.DeviceType); err != nil {
 			return nil, err
 		}
 		devices = append(devices, device)
@@ -46,7 +49,7 @@ func GetAllDevices() ([]models.Device, error) {
 func GetDeviceByID(id int) (models.Device, error) {
     var device models.Device
     err := database.DB.QueryRow(
-        `SELECT id, device_code, device_name, location, status FROM devices WHERE id = ?`,
+        `SELECT id, device_code, device_name, location, status, device_type FROM devices WHERE id = ?`,
         id,
     ).Scan(
         &device.ID,
@@ -54,12 +57,13 @@ func GetDeviceByID(id int) (models.Device, error) {
         &device.DeviceName,
         &device.Location,
         &device.Status,
+        &device.DeviceType,
     )
     return device, err
 }
 
 func UpdateDevice(device *models.Device) error {
-	query := `UPDATE devices SET device_code = ?, device_name = ?, location = ?, status = ? WHERE id = ?`
+	query := `UPDATE devices SET device_code = ?, device_name = ?, location = ?, status = ?, device_type = ? WHERE id = ?`
 
 	_, err := database.DB.Exec(
 		query,
@@ -67,6 +71,7 @@ func UpdateDevice(device *models.Device) error {
 		device.DeviceName,
 		device.Location,
 		device.Status,
+		device.DeviceType,
 		device.ID,
 	)
 

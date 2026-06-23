@@ -4,6 +4,7 @@ create table if not exists devices (
     device_name text not null,
     location text not null,
     status integer not null default 1,
+    device_type text,
     created_at timestamp default current_timestamp
 );
 
